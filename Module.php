@@ -1,4 +1,5 @@
 <?php
+
 namespace yuncms\wallet;
 
 use Yii;
@@ -24,6 +25,21 @@ class Module extends \yii\base\Module
     public $defaultRoute = 'wallet';
 
     /**
+     * @var int 最小提现
+     */
+    public $withdrawalsMin = 100;
+
+    /**
+     * @var array Mailer configuration
+     */
+    public $mailViewPath = '@yuncms/wallet/views/mail';
+
+    /**
+     * @var string|array Default: `Yii::$app->params['adminEmail']` OR `no-reply@example.com`
+     */
+    public $mailSender;
+
+    /**
      * @throws InvalidConfigException
      */
     public function init()
@@ -46,6 +62,28 @@ class Module extends \yii\base\Module
             ];
         }
     }
+
+    /**
+     * 给用户发送邮件
+     * @param string $to 收件箱
+     * @param string $subject 标题
+     * @param string $view 视图
+     * @param array $params 参数
+     * @return boolean
+     */
+    public function sendMessage($to, $subject, $view, $params = [])
+    {
+        /** @var \yii\mail\BaseMailer $mailer */
+        $mailer = Yii::$app->mailer;
+        $mailer->viewPath = $this->mailViewPath;
+        $mailer->getView()->theme = Yii::$app->view->theme;
+        $message = $mailer->compose(['html' => $view, 'text' => 'text/' . $view], $params)->setTo($to)->setSubject($subject);
+        if ($this->mailSender != null) {
+            $message->setFrom($this->mailSender);
+        }
+        return $message->send();
+    }
+
 
     /**
      * 变更指定用户钱包 + 钱或 - 钱

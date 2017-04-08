@@ -34,9 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'layout' => 'horizontal',
                 ]); ?>
 
-                <div class="form-group field-withdrawals-money required">
+                <div class="form-group">
                     <label class="control-label col-sm-3"
-                           for="withdrawals-money"><?= Yii::t('wallet', 'Amount') ?></label>
+                           for="withdrawals-amount"><?= Yii::t('wallet', 'Amount') ?></label>
                     <div class="col-sm-6">
                         <?= $wallet->money ?>
                     </div>

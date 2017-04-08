@@ -60,32 +60,15 @@ class Withdrawals extends ActiveRecord
         return [
             [['bankcard_id', 'money', 'currency'], 'required'],
             [['bankcard_id'], 'integer'],
-            ['money', 'validateMoney'],
+            //['money', 'validateMoney'],
+            ['money', 'integer',
+                'min' => $this->getModule()->withdrawalsMin,
+                'max' => $this->getAmount(),
+                'tooBig' => Yii::t('wallet', 'Insufficient money, please recharge.'),
+                'tooSmall' => Yii::t('wallet', 'The minimum extraction of withdrawals {num}.', ['num' => $this->getModule()->withdrawalsMin])],
             ['status', 'default', 'value' => self::STATUS_PENDING],
             ['status', 'in', 'range' => [self::STATUS_PENDING, self::STATUS_REJECTED, self::STATUS_AUTHENTICATED]],
         ];
-    }
-
-    /**
-     * 验证钱数
-     * @param $attribute
-     * @param $params
-     */
-    public function validateMoney($attribute, $params)
-    {
-        if($this->money < 0){
-            $this->addError($attribute, Yii::t('wallet', 'Please enter the correct money.'));
-            return;
-        }
-        $wallet = Wallet::find()->where(['user_id' => Yii::$app->user->identity->id, 'currency' => $this->currency])->one();
-        if(!$wallet){
-            $this->addError($attribute, Yii::t('wallet', 'Insufficient money.'));
-            return;
-        }
-        if ($this->money < $wallet->money) {
-            $this->addError($attribute, Yii::t('wallet', 'Insufficient money, please recharge.'));
-            return;
-        }
     }
 
     /**
@@ -111,6 +94,63 @@ class Withdrawals extends ActiveRecord
     public function getBankcard()
     {
         return $this->hasOne(Bankcard::className(), ['id' => 'bankcard_id']);
+    }
+
+    /**
+     * 获取钱包余额
+     * @return float
+     */
+    public function getAmount()
+    {
+        if (($wallet = Wallet::findByUserID(Yii::$app->user->id, $this->currency)) != false) {
+            return $wallet->money;
+        } else {
+            return 0.00;
+        }
+    }
+
+    /**
+     * 获取模块实例
+     * @return null|\yii\base\Module|\yuncms\wallet\Module
+     */
+    public function getModule()
+    {
+        return Yii::$app->getModule('wallet');
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {//入库前先扣钱
+                if (!$this->getModule()->wallet($this->user_id, $this->currency, -$this->money, Yii::t('wallet', 'Withdrawals'))) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 保存后执行
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'),'notice',[
+
+            ]);
+        } else if ($this->status == self::STATUS_REJECTED) {//拒绝了提现请求
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'),'notice',[
+
+            ]);
+        } else if ($this->status == self::STATUS_REJECTED) {//通过并打款
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'),'notice',[
+
+            ]);
+        }
     }
 
     /**

@@ -99,7 +99,7 @@ class Wallet extends ActiveRecord
      *
      * @param int $userID 用户ID
      * @param string $currency 币种
-     * @return static
+     * @return $this
      */
     public static function findByUserID($userID, $currency)
     {

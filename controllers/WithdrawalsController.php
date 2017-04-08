@@ -76,11 +76,11 @@ class WithdrawalsController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            $wallet = Wallet::find()->where(['user_id' => Yii::$app->user->identity->id, 'currency' => $currency])->one();
+            $wallet = Wallet::find()->where(['user_id' => Yii::$app->user->id, 'currency' => $currency])->one();
             return $this->render('create', [
                 'model' => $model,
                 'currency' => $currency,
-                'wallet'=>$wallet
+                'wallet' => $wallet
             ]);
         }
     }
