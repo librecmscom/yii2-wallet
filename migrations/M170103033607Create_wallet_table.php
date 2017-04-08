@@ -39,6 +39,7 @@ class M170103033607Create_wallet_table extends Migration
         ], $tableOptions);
 
         $this->addForeignKey('{{%wallet_log_ibfk_1}}', '{{%wallet_log}}', 'wallet_id', '{{%wallet}}', 'id', 'CASCADE', 'RESTRICT');
+        $this->addForeignKey('{{%wallet_log_ibfk_2}}', '{{%wallet}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
 
     }
 
