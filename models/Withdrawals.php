@@ -139,16 +139,19 @@ class Withdrawals extends ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
-            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'),'notice',[
-
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'), 'notice', [
+                'user' => $this->user,
+                'message' => '',
             ]);
         } else if ($this->status == self::STATUS_REJECTED) {//拒绝了提现请求
-            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'),'notice',[
-
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'), 'notice', [
+                'user' => $this->user,
+                'message' => '',
             ]);
         } else if ($this->status == self::STATUS_REJECTED) {//通过并打款
-            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'),'notice',[
-
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'), 'notice', [
+                'user' => $this->user,
+                'message' => '',
             ]);
         }
     }
