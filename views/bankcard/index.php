@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel yuncms\user\models\BankcardSearch */
+/* @var $searchModel yuncms\wallet\models\BankcardSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('wallet', 'Bankcards');

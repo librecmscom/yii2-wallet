@@ -17,6 +17,8 @@ use yii\db\BaseActiveRecord;
  * @property integer $purse_id
  * @property string $type
  * @property double $amount
+ * @property string $action
+ * @property string $msg
  * @property integer $created_at
  */
 class WalletLog extends ActiveRecord

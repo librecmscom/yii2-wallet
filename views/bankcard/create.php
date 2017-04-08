@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h2 class="h3 profile-title">
             <?= Html::encode($this->title) ?>
             <div class="pull-right">
-                <a class="btn btn-primary" href="<?= Url::to(['/user/bankcard/index']); ?>"
+                <a class="btn btn-primary" href="<?= Url::to(['/wallet/bankcard/index']); ?>"
                    ><?= Yii::t('wallet', 'Bankcards'); ?></a>
             </div>
         </h2>

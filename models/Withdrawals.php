@@ -94,13 +94,13 @@ class Withdrawals extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => Yii::t('user', 'User Id'),
-            'bankcard_id' => Yii::t('user', 'BankCard'),
-            'currency' => Yii::t('user', 'Currency'),
-            'Money' => Yii::t('user', 'Money'),
-            'status' => Yii::t('user', 'Status'),
-            'created_at' => Yii::t('user', 'Created At'),
-            'updated_at' => Yii::t('user', 'Updated At'),
+            'user_id' => Yii::t('wallet', 'User Id'),
+            'bankcard_id' => Yii::t('wallet', 'Bankcard'),
+            'currency' => Yii::t('wallet', 'Currency'),
+            'Money' => Yii::t('wallet', 'Money'),
+            'status' => Yii::t('wallet', 'Status'),
+            'created_at' => Yii::t('wallet', 'Created At'),
+            'updated_at' => Yii::t('wallet', 'Updated At'),
         ];
     }
 

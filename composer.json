@@ -25,5 +25,8 @@
     "psr-4": {
       "yuncms\\wallet\\": ""
     }
+  },
+  "suggest": {
+    "yuncms/yii2-payment": "Allows you to use Payment"
   }
 }

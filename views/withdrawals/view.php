@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model yuncms\user\models\Withdrawals */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Withdrawals'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('wallet', 'Withdrawals'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -19,12 +19,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::encode($this->title) ?>
             <div class="pull-right">
                 <a class="btn btn-primary"
-                   href="<?= Url::to(['/wallet/wallet/index']); ?>"><?= Yii::t('user', 'Create'); ?></a>
-                <?= Html::a(Yii::t('user', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a(Yii::t('user', 'Delete'), ['delete', 'id' => $model->id], [
+                   href="<?= Url::to(['/wallet/wallet/index']); ?>"><?= Yii::t('wallet', 'Create'); ?></a>
+                <?= Html::a(Yii::t('wallet', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a(Yii::t('wallet', 'Delete'), ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => Yii::t('user', 'Are you sure you want to delete this item?'),
+                        'confirm' => Yii::t('wallet', 'Are you sure you want to delete this item?'),
                         'method' => 'post',
                     ],
                 ]) ?>
@@ -32,8 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </h2>
         <div class="row">
             <div class="col-md-12">
-
-
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [
@@ -45,7 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'updated_at',
                     ],
                 ]) ?>
-
             </div>
         </div>
     </div>

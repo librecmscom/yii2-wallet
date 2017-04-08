@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $this->render('@yuncms/user/views/_profile_menu') ?>
         </div>
         <div class="col-md-10">
-            <h2 class="h3 profile-title"><?= Yii::t('wallet', 'Wallet') ?></h2>
+            <h2 class="h3 profile-title"><?= Yii::t('wallet', 'Wallets') ?></h2>
             <div class="row">
                 <div class="col-md-12">
                     <?= GridView::widget([
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'money',
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'header' => Yii::t('user', 'Operation'),
+                                'header' => Yii::t('wallet', 'Operation'),
                                 'template' => '{recharge}',
                                 'buttons' => [
                                     'recharge' =>

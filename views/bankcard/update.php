@@ -3,9 +3,9 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model yuncms\user\models\BankCard */
+/* @var $model yuncms\wallet\models\Bankcard */
 
-$this->title = Yii::t('wallet', 'Update{modelClass}: ', [
+$this->title = Yii::t('wallet', 'Update Bankcard: ', [
         'modelClass' => Yii::t('wallet', 'Bankcard'),
     ]) . $model->number;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('wallet', 'Bankcards'), 'url' => ['index']];

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model yuncms\user\models\BankCard */
+/* @var $model yuncms\wallet\models\BankCard */
 
 $this->title = $model->number;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('wallet', 'Bankcards'), 'url' => ['index']];
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]) ?>
                 <a class="btn btn-primary"
-                   href="<?= Url::to(['/wallet/bankcard/index']); ?>"><?= Yii::t('wallet', 'BankCard'); ?></a>
+                   href="<?= Url::to(['/wallet/bankcard/index']); ?>"><?= Yii::t('wallet', 'Bankcard'); ?></a>
             </div>
         </h2>
         <div class="row">
