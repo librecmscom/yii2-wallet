@@ -7,9 +7,10 @@
 namespace yuncms\wallet\controllers;
 
 use Yii;
-use yii\web\NotFoundHttpException;
-use yuncms\video\models\Video;
-use yuncms\video\models\VideoSearch;
+use yii\web\Controller;
+use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
+use yuncms\wallet\models\Wallet;
 
 /**
  * Class WalletController
@@ -17,48 +18,34 @@ use yuncms\video\models\VideoSearch;
  */
 class WalletController extends \yii\web\Controller
 {
-    public function actionIndex()
+    /** @inheritdoc */
+    public function behaviors()
     {
-        $searchModel = new VideoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['@']
+                    ]
+                ]
+            ]
+        ];
     }
 
     /**
-     * 显示视频详情
-     * @param string $uuid
+     * 显示钱包首页
      * @return string
      */
-    public function actionView($uuid)
+    public function actionIndex()
     {
-        /** @var  Video $model */
-        $model = $this->findModel($uuid);
-        if (!Yii::$app->user->isGuest && Yii::$app->user->id != $model->user_id) {
-            //更新播放计数
-            $model->updateCounters(['views' => 1]);
-        }
-        return $this->render('view', [
-            'model' => $model,
+        $dataProvider = new ActiveDataProvider([
+            'query' => Wallet::find()->where(['user_id' => Yii::$app->user->id])->orderBy(['created_at' => SORT_DESC]),
         ]);
-    }
-
-    /**
-     * Finds the Video model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     *
-     * @param string $uuid
-     * @return Video the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($uuid)
-    {
-        if (($model = Video::findOne(['uuid' => $uuid])) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException(Yii::t('yii', 'The requested page does not exist.'));
-        }
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }
