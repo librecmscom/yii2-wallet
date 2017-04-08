@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-md-2">
-            <?= $this->render('/_profile_menu') ?>
+            <?= $this->render('@yuncms/user/views/_profile_menu') ?>
         </div>
         <div class="col-md-10">
             <h2 class="h3 profile-title"><?= Yii::t('wallet', 'Wallet') ?></h2>
