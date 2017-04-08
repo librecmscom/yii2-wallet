@@ -23,6 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="pull-right">
                 <a class="btn btn-primary" href="<?= Url::to(['/wallet/wallet/index']); ?>"
                 ><?= Yii::t('wallet', 'Wallet'); ?></a>
+
+                <a class="btn btn-primary" href="<?= Url::to(['/wallet/withdrawals/index']); ?>"
+                ><?= Yii::t('wallet', 'Withdrawals'); ?></a>
             </div>
         </h2>
         <div class="row">
@@ -32,18 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]); ?>
 
                 <div class="form-group field-withdrawals-money required">
-                    <label class="control-label col-sm-3" for="withdrawals-money">币种</label>
+                    <label class="control-label col-sm-3"
+                           for="withdrawals-money"><?= Yii::t('wallet', 'Amount') ?></label>
                     <div class="col-sm-6">
                         <?= $wallet->money ?>
                     </div>
                 </div>
 
-                <div class="form-group field-withdrawals-money required">
-                    <label class="control-label col-sm-3" for="withdrawals-money">币种</label>
-                    <div class="col-sm-6">
-                        <?= $currency ?>
-                    </div>
-                </div>
+                <?= $form->field($model, 'currency', ['inputOptions' => ['disabled' => true]]) ?>
 
                 <?= $form->field($model, 'bankcard_id')->dropDownList(
                     ArrayHelper::map(Bankcard::find()->select(['id', "CONCAT(bank,' - ',username,' - ',number) as name"])->where(['user_id' => Yii::$app->user->id])->asArray()->all(), 'id', 'name')

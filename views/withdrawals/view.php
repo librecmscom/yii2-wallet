@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model yuncms\user\models\Withdrawals */
+/* @var $model yuncms\wallet\models\Withdrawals */
 
-$this->title = $model->id;
+$this->title = Yii::t('wallet', 'Withdrawals');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('wallet', 'Withdrawals'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -18,16 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <h2 class="h3 profile-title">
             <?= Html::encode($this->title) ?>
             <div class="pull-right">
-                <a class="btn btn-primary"
-                   href="<?= Url::to(['/wallet/wallet/index']); ?>"><?= Yii::t('wallet', 'Create'); ?></a>
-                <?= Html::a(Yii::t('wallet', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a(Yii::t('wallet', 'Delete'), ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => Yii::t('wallet', 'Are you sure you want to delete this item?'),
-                        'method' => 'post',
-                    ],
-                ]) ?>
+                <a class="btn btn-primary" href="<?= Url::to(['/wallet/withdrawals/index']); ?>"
+                ><?= Yii::t('wallet', 'Withdrawals'); ?></a>
             </div>
         </h2>
         <div class="row">
@@ -35,6 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [
+                        [
+                            'label' => Yii::t('wallet', 'Bankcard'),
+                            'value' => function ($model) {
+                                return $model->bankcard->bank . '-' . substr($model->bankcard->number, -4);
+                            },
+                        ],
                         'bankcard_id',
                         'currency',
                         'money',

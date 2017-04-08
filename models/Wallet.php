@@ -57,7 +57,7 @@ class Wallet extends ActiveRecord
     {
         return [
             'currency' => Yii::t('wallet', 'Currency'),
-            'amount' => Yii::t('wallet', 'Amount'),
+            'money' => Yii::t('wallet', 'Amount'),
         ];
     }
 

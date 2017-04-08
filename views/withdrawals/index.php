@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Yii::t('wallet', 'Withdrawals') ?>
             <div class="pull-right">
                 <a class="btn btn-primary"
-                   href="<?= Url::to(['/wallet/wallet/index']); ?>"><?= Yii::t('wallet', 'Create'); ?></a>
+                   href="<?= Url::to(['/wallet/wallet/index']); ?>"><?= Yii::t('wallet', 'Wallet'); ?></a>
             </div>
         </h2>
         <div class="row">
@@ -30,18 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     'layout' => "{items}\n{pager}",
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
-                        'bankcard_id',
+
                         [
                             'label' => Yii::t('wallet', 'Bankcard'),
                             'value' => function ($model) {
-                                return $model->bankcard->bank . substr($model->bankcard->number,-4);
+                                return $model->bankcard->bank .'-'. substr($model->bankcard->number,-4);
                             },
                         ],
                         'currency',
                         'money',
                         'status',
-                        'created_at',
-                        'updated_at',
+                        'created_at:datetime',
+                        'updated_at:datetime',
                         [
                             'class' => 'yii\grid\ActionColumn',
                             'template' => '{view}',

@@ -19,7 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $this->render('@yuncms/user/views/_profile_menu') ?>
         </div>
         <div class="col-md-10">
-            <h2 class="h3 profile-title"><?= Yii::t('wallet', 'Wallets') ?></h2>
+            <h2 class="h3 profile-title">
+                <?= Yii::t('wallet', 'Wallets') ?>
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="<?= Url::to(['/wallet/withdrawals/index']); ?>"
+                    ><?= Yii::t('wallet', 'Withdrawals'); ?></a>
+                </div>
+            </h2>
             <div class="row">
                 <div class="col-md-12">
                     <?= GridView::widget([
