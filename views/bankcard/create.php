@@ -20,6 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="pull-right">
                 <a class="btn btn-primary" href="<?= Url::to(['/wallet/bankcard/index']); ?>"
                    ><?= Yii::t('wallet', 'Bankcards'); ?></a>
+                <a class="btn btn-primary"
+                   href="<?= Url::to(['/wallet/wallet/index']); ?>"><?= Yii::t('wallet', 'Wallet'); ?></a>
             </div>
         </h2>
         <div class="row">
