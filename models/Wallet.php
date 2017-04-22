@@ -105,7 +105,7 @@ class Wallet extends ActiveRecord
     {
         $purse = static::findOne(['user_id' => $userID, 'currency' => $currency]);
         if (!$purse) {
-            $purse = static::create(['user_id' => $userID, 'currency' => $currency, 'amount' => 0.00]);
+            $purse = static::create(['user_id' => $userID, 'currency' => $currency, 'money' => 0.00]);
         }
         return $purse;
     }

@@ -102,11 +102,12 @@ class Withdrawals extends ActiveRecord
      */
     public function getAmount()
     {
-        if (($wallet = Wallet::findByUserID(Yii::$app->user->id, $this->currency)) != false) {
-            return $wallet->money;
-        } else {
-            return 0.00;
+        if ($this->currency) {
+            if (($wallet = Wallet::findByUserID(Yii::$app->user->id, $this->currency)) != false) {
+                return $wallet->money;
+            }
         }
+        return 0.00;
     }
 
     /**
