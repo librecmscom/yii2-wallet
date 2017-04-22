@@ -88,7 +88,7 @@ class Wallet extends ActiveRecord
     public static function create(array $attribute)
     {
         $model = new static ($attribute);
-        if ($model->save()) {
+        if ($model->save(false)) {
             return $model;
         }
         return false;
