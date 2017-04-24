@@ -58,6 +58,8 @@ class WithdrawalsSearch extends Withdrawals
             return $dataProvider;
         }
 
+        $query->orderBy(['status' => SORT_ASC, 'id' => SORT_DESC]);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -72,5 +74,28 @@ class WithdrawalsSearch extends Withdrawals
         $query->andFilterWhere(['like', 'currency', $this->currency]);
 
         return $dataProvider;
+    }
+
+    /**
+     * 下拉筛选
+     * @param string $column
+     * @param null|string $value
+     * @return bool|mixed
+     */
+    public static function dropDown($column, $value = null)
+    {
+        $dropDownList = [
+            "status" => [
+                Withdrawals::STATUS_PENDING => Yii::t('wallet', 'Pending'),
+                Withdrawals::STATUS_REJECTED => Yii::t('wallet', 'Rejected'),
+                Withdrawals::STATUS_DONE => Yii::t('wallet', 'Done'),
+            ],
+        ];
+        //根据具体值显示对应的值
+        if ($value !== null) {
+            return array_key_exists($column, $dropDownList) ? $dropDownList[$column][$value] : false;
+        } else {//返回关联数组，用户下拉的filter实现
+            return array_key_exists($column, $dropDownList) ? $dropDownList[$column] : false;
+        }
     }
 }

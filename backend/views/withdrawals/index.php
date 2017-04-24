@@ -7,6 +7,7 @@ use xutl\inspinia\Toolbar;
 use xutl\inspinia\Alert;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel yuncms\wallet\backend\models\WithdrawalsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -14,7 +15,7 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('wallet', 'Manage Withdrawals');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
-    yii.confirm('" . Yii::t('app', 'Are you sure you want to delete this item?')."',function(){
+    yii.confirm('" . Yii::t('app', 'Are you sure you want to delete this item?') . "',function(){
         var ids = jQuery('#gridview').yiiGridView(\"getSelectedRows\");
         jQuery.post(\"/withdrawals/batch-delete\",{ids:ids});
     });
@@ -24,7 +25,7 @@ $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
     <div class="row">
         <div class="col-lg-12 withdrawals-index">
             <?= Alert::widget() ?>
-            <?php Pjax::begin(); ?>                
+            <?php Pjax::begin(); ?>
             <?php Box::begin([
                 //'noPadding' => true,
                 'header' => Html::encode($this->title),
@@ -37,7 +38,7 @@ $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
                             'url' => ['index'],
                         ],
                         [
-                            'options' => ['id' => 'batch_deletion', 'class'=>'btn btn-sm btn-danger'],
+                            'options' => ['id' => 'batch_deletion', 'class' => 'btn btn-sm btn-danger'],
                             'label' => Yii::t('wallet', 'Batch Deletion'),
                             'url' => 'javascript:void(0);',
                         ]
@@ -60,10 +61,35 @@ $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
                     ],
                     //['class' => 'yii\grid\SerialColumn'],
                     'id',
-                    'user_id',
+                    'user.username',
+                    [
+                        'header' => Yii::t('wallet', 'BankName'),
+                        'value' => function ($model) {
+                            return $model->bankcard->bank;
+                        },
+                    ],
+                    [
+                        'header' => Yii::t('wallet', 'BankName'),
+                        'value' => function ($model) {
+                            return $model->bankcard->number;
+                        },
+                    ],
                     'bankcard_id',
                     'currency',
                     'money',
+                    [
+                        'header' => Yii::t('wallet', 'Status'),
+                        'value' => function ($model) {
+                            if ($model->isPending()) {
+                                return Html::tag('span', Yii::t('wallet', 'Pending'), ['class' => 'label label-warning']);
+                            } elseif ($model->isRejected()) {
+                                return Html::tag('span', Yii::t('wallet', 'Rejected'), ['class' => 'label label-danger']);
+                            } else if ($model->isDone()) {
+                                return Html::tag('span', Yii::t('wallet', 'Done'), ['class' => 'label label-success']);
+                            }
+                        },
+                        'format' => 'raw',
+                    ],
                     // 'status',
                     // 'created_at',
                     // 'updated_at',

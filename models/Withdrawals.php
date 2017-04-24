@@ -18,6 +18,7 @@ use yii\db\ActiveRecord;
  * @property int $status
  * @property string $currency
  * @property double $money
+ * @property int $confirmed_at
  * @package yuncms\user\models
  */
 class Withdrawals extends ActiveRecord
@@ -68,7 +69,7 @@ class Withdrawals extends ActiveRecord
                 'tooBig' => Yii::t('wallet', 'Insufficient money, please recharge.'),
                 'tooSmall' => Yii::t('wallet', 'The minimum extraction of withdrawals {num}.', ['num' => $this->getModule()->withdrawalsMin])],
             ['status', 'default', 'value' => self::STATUS_PENDING],
-            ['status', 'in', 'range' => [self::STATUS_PENDING, self::STATUS_REJECTED, self::STATUS_AUTHENTICATED]],
+            ['status', 'in', 'range' => [self::STATUS_PENDING, self::STATUS_REJECTED, self::STATUS_DONE]],
         ];
     }
 
@@ -124,6 +125,25 @@ class Withdrawals extends ActiveRecord
     public function isPending()
     {
         return $this->status == static::STATUS_PENDING;
+    }
+
+    /**
+     * 设置该提现已经打款
+     */
+    public function setDone()
+    {
+        return (bool)$this->updateAttributes(['confirmed_at' => time(), 'status' => static::STATUS_DONE]);
+    }
+
+    public function setRejected()
+    {
+        if((bool)$this->updateAttributes(['confirmed_at' => time(), 'status' => static::STATUS_REJECTED])){
+            //退款
+            if (!$this->getModule()->wallet($this->user_id, $this->currency, $this->money, Yii::t('wallet', 'Withdrawals Rejected'))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yuncms\wallet\models\Withdrawals;
 use yuncms\wallet\backend\models\WithdrawalsSearch;
 use yii\web\Controller;
-
+use yii\helpers\Url;
 
 /**
  * WithdrawalsController implements the CRUD actions for Withdrawals model.
@@ -27,10 +27,42 @@ class WithdrawalsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'confirm' => ['POST'],
                     'batch-delete' => ['POST'],
+                    'rejected' => ['POST'],
                 ],
             ],
         ];
+    }
+
+    /**
+     * rejected the Withdrawals.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function actionRejected($id)
+    {
+        $model = $this->findModel($id);
+        $model->setRejected();
+        Yii::$app->getSession()->setFlash('success', Yii::t('wallet', 'Withdrawals has been rejected'));
+        return $this->redirect(Url::previous('actions-redirect'));
+    }
+
+    /**
+     * Confirms the Withdrawals.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function actionConfirm($id)
+    {
+        $model = $this->findModel($id);
+        $model->setDone();
+        Yii::$app->getSession()->setFlash('success', Yii::t('wallet', 'Withdrawals has been confirmed'));
+        return $this->redirect(Url::previous('actions-redirect'));
     }
 
     /**
@@ -39,6 +71,7 @@ class WithdrawalsController extends Controller
      */
     public function actionIndex()
     {
+        Url::remember('', 'actions-redirect');
         $searchModel = new WithdrawalsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -55,6 +88,7 @@ class WithdrawalsController extends Controller
      */
     public function actionView($id)
     {
+        Url::remember('', 'actions-redirect');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -67,13 +101,14 @@ class WithdrawalsController extends Controller
      */
     public function actionCreate()
     {
+        Url::remember('', 'actions-redirect');
         $model = new Withdrawals();
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app','Create success.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create success.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -90,13 +125,14 @@ class WithdrawalsController extends Controller
      */
     public function actionUpdate($id)
     {
+        Url::remember('', 'actions-redirect');
         $model = $this->findModel($id);
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app','Update success.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Update success.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -114,14 +150,15 @@ class WithdrawalsController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->getSession()->setFlash('success', Yii::t('app','Delete success.'));
+        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete success.'));
         return $this->redirect(['index']);
     }
-     /**
-      * Batch Delete existing Withdrawals model.
-      * If deletion is successful, the browser will be redirected to the 'index' page.
-      * @return mixed
-      */
+
+    /**
+     * Batch Delete existing Withdrawals model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @return mixed
+     */
     public function actionBatchDelete()
     {
         if (($ids = Yii::$app->request->post('ids', null)) != null) {

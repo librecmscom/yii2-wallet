@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use xutl\inspinia\ActiveForm;
+use yuncms\wallet\models\Withdrawals;
 
 /* @var $this yii\web\View */
 /* @var $model yuncms\wallet\backend\models\WithdrawalsSearch */
@@ -28,10 +29,10 @@ use xutl\inspinia\ActiveForm;
         ],
     ]) ?>
 
-    <?= $form->field($model, 'bankcard_id', [
-        'inputOptions' => [
-            'placeholder' => $model->getAttributeLabel('bankcard_id'),
-        ],
+    <?= $form->field($model, 'status')->dropDownList([
+        Withdrawals::STATUS_PENDING => Yii::t('wallet', 'Pending'),
+        Withdrawals::STATUS_REJECTED => Yii::t('wallet', 'Rejected'),
+        Withdrawals::STATUS_DONE => Yii::t('wallet', 'Done'),
     ]) ?>
 
     <?php // echo $form->field($model, 'currency') ?>
@@ -46,7 +47,6 @@ use xutl\inspinia\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

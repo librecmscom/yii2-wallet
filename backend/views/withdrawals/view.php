@@ -55,12 +55,49 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'user_id',
-                    'bankcard_id',
+                    'user.username',
+                    'bankcard.bank',
+                    'bankcard.city',
+                    'bankcard.name',
+                    'bankcard.username',
+                    'bankcard.number',
                     'currency',
                     'money',
-                    'status',
-                    'created_at',
-                    'updated_at',
+                    [
+                        'attribute' => Yii::t('wallet', 'Status'),
+                        'value' => function ($model) {
+                            if ($model->isPending()) {
+                                return Html::tag('span', Yii::t('wallet', 'Pending'), ['class' => 'label label-warning']);
+                            } elseif ($model->isRejected()) {
+                                return Html::tag('span', Yii::t('wallet', 'Rejected'), ['class' => 'label label-danger']);
+                            } else if ($model->isDone()) {
+                                return Html::tag('span', Yii::t('wallet', 'Done'), ['class' => 'label label-success']);
+                            }
+                        },
+                        'format' => 'raw',
+                    ],
+                    'created_at:datetime',
+                    'updated_at:datetime',
+                    [
+                        'attribute' => Yii::t('wallet', 'Status'),
+                        'value' => function ($model) {
+                            if ($model->isPending()) {
+                                $raw = Html::a(Yii::t('wallet', 'Done'), ['confirm', 'id' => $model->id], [
+                                    'class' => 'btn btn-xs btn-success',
+                                    'data-method' => 'post',
+                                    'data-confirm' => Yii::t('user', 'Are you sure you want to done?'),
+                                ]);
+                                $raw .= '   ' . Html::a(Yii::t('wallet', 'Rejected'), ['rejected', 'id' => $model->id], [
+                                        'class' => 'btn btn-xs btn-danger',
+                                        'data-method' => 'post',
+                                        'data-confirm' => Yii::t('user', 'Are you sure you want to rejected?'),
+                                    ]);
+                                return $raw;
+                            }
+                            return '';
+                        },
+                        'format' => 'raw',
+                    ],
                 ],
             ]) ?>
             <?php Box::end(); ?>
