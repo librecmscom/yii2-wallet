@@ -33,12 +33,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $model->bankcard->bank . '-' . substr($model->bankcard->number, -4);
                             },
                         ],
-                        'bankcard_id',
+                        //'bankcard_id',
                         'currency',
                         'money',
-                        'status',
-                        'created_at',
-                        'updated_at',
+                        [
+                            'attribute' => Yii::t('wallet', 'Status'),
+                            'value' => function ($model) {
+                                if ($model->isPending()) {
+                                    return Html::tag('span', Yii::t('wallet', 'Pending'), ['class' => 'label label-warning']);
+                                } elseif ($model->isRejected()) {
+                                    return Html::tag('span', Yii::t('wallet', 'Rejected'), ['class' => 'label label-danger']);
+                                } else if ($model->isDone()) {
+                                    return Html::tag('span', Yii::t('wallet', 'Rejected'), ['class' => 'label label-success']);
+                                }
+                            },
+                            'format' => 'raw',
+                        ],
+                        'created_at:datetime',
+                        'updated_at:datetime',
                     ],
                 ]) ?>
             </div>

@@ -15,6 +15,7 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property int $user_id
  * @property int $bankcard_id
+ * @property int $status
  * @property string $currency
  * @property double $money
  * @package yuncms\user\models
@@ -23,7 +24,7 @@ class Withdrawals extends ActiveRecord
 {
     const STATUS_PENDING = 0;
     const STATUS_REJECTED = 1;
-    const STATUS_AUTHENTICATED = 2;
+    const STATUS_DONE = 2;
 
     /**
      * @inheritdoc
@@ -108,6 +109,21 @@ class Withdrawals extends ActiveRecord
             }
         }
         return 0.00;
+    }
+
+    public function isRejected()
+    {
+        return $this->status == static::STATUS_REJECTED;
+    }
+
+    public function isDone()
+    {
+        return $this->status == static::STATUS_DONE;
+    }
+
+    public function isPending()
+    {
+        return $this->status == static::STATUS_PENDING;
     }
 
     /**
