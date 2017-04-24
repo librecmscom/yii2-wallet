@@ -60,8 +60,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'username',
                     'name',
                     'number',
-                    'created_at',
-                    'updated_at',
+                    'created_at:datetime',
+                    'updated_at:datetime',
                 ],
             ]) ?>
             <?php Box::end(); ?>
