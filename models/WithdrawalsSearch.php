@@ -40,7 +40,7 @@ class WithdrawalsSearch extends Withdrawals
      */
     public function search($params)
     {
-        $query = Withdrawals::find();
+        $query = Withdrawals::find()->orderBy(['updated_at' => SORT_DESC]);
 
         // add conditions that should always apply here
 

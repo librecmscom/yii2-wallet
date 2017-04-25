@@ -69,7 +69,7 @@ $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
                     'currency',
                     'money',
                     'created_at:datetime',
-                    // 'updated_at',
+                     'updated_at:datetime',
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'header' => Yii::t('wallet', 'Operation'),

@@ -42,7 +42,7 @@ class WalletSearch extends Wallet
      */
     public function search($params)
     {
-        $query = Wallet::find();
+        $query = Wallet::find()->orderBy(['updated_at' => SORT_DESC]);
 
         // add conditions that should always apply here
 

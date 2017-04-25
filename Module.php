@@ -104,7 +104,7 @@ class Module extends \yii\base\Module
         $transaction = Wallet::getDb()->beginTransaction();
         try {
             //更新用户钱包
-            $wallet->updateAttributes(['money' => $value]);
+            $wallet->updateAttributes(['money' => $value,'updated_at'=>time()]);
             //创建钱包操作日志
             WalletLog::create([
                 'wallet_id' => $wallet->id,
