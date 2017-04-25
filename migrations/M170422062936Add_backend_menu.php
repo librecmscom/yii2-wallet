@@ -35,6 +35,7 @@ class M170422062936Add_backend_menu extends Migration
         $this->batchInsert('{{%admin_menu}}', ['name', 'parent', 'route', 'visible', 'sort'], [
             ['创建钱包', $id, '/wallet/wallet/create', 0, NULL],
             ['更新钱包', $id, '/wallet/wallet/update', 0, NULL],
+            ['查看钱包', $id, '/wallet/wallet/view', 0, NULL],
         ]);
 
         $this->insert('{{%admin_menu}}', [
@@ -50,6 +51,7 @@ class M170422062936Add_backend_menu extends Migration
         $this->batchInsert('{{%admin_menu}}', ['name', 'parent', 'route', 'visible', 'sort'], [
             ['添加提现', $id, '/wallet/withdrawals/create', 0, NULL],
             ['更新提现', $id, '/wallet/withdrawals/update', 0, NULL],
+            ['查看提现', $id, '/wallet/withdrawals/view', 0, NULL],
         ]);
     }
 

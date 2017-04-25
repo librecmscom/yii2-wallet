@@ -4,6 +4,7 @@
  * @copyright Copyright (c) 2012 TintSoft Technology Co. Ltd.
  * @license http://www.tintsoft.com/license/
  */
+
 namespace yuncms\wallet\models;
 
 use Yii;
@@ -69,10 +70,13 @@ class WalletLog extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'type' => Yii::t('wallet', 'WalletLog Type'),
-            'msg' => Yii::t('wallet', 'WalletLog Msg'),
-            'value' => Yii::t('wallet', 'WalletLog Value'),
-            'created_at' => Yii::t('wallet', 'WalletLog Created At'),
+            'id' => Yii::t('wallet', 'Serial Number'),
+            'type' => Yii::t('wallet', 'Income & Expense'),
+            'msg' => Yii::t('wallet', 'Msg'),
+            'currency' => Yii::t('wallet', 'Currency'),
+            'money' => Yii::t('wallet', 'Money'),
+            'action' => Yii::t('wallet', 'Action'),
+            'created_at' => Yii::t('wallet', 'Created At'),
         ];
     }
 

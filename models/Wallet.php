@@ -56,8 +56,12 @@ class Wallet extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id'=>Yii::t('wallet', 'Wallet Number'),
+            'user_id'=>Yii::t('wallet', 'User ID'),
             'currency' => Yii::t('wallet', 'Currency'),
             'money' => Yii::t('wallet', 'Amount'),
+            'created_at' => Yii::t('wallet', 'Created At'),
+            'updated_at' => Yii::t('wallet', 'Updated At'),
         ];
     }
 

@@ -4,13 +4,13 @@ namespace yuncms\wallet\backend\controllers;
 
 use Yii;
 use yii\web\Response;
+use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\bootstrap\ActiveForm;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yuncms\wallet\models\Wallet;
 use yuncms\wallet\backend\models\WalletSearch;
-use yii\web\Controller;
-
 
 /**
  * WalletController implements the CRUD actions for Wallet model.
@@ -55,8 +55,13 @@ class WalletController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $model->getLogs()->orderBy(['id' => SORT_DESC]),
+        ]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -73,7 +78,7 @@ class WalletController extends Controller
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app','Create success.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create success.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -96,7 +101,7 @@ class WalletController extends Controller
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app','Update success.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Update success.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -114,14 +119,15 @@ class WalletController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->getSession()->setFlash('success', Yii::t('app','Delete success.'));
+        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete success.'));
         return $this->redirect(['index']);
     }
-     /**
-      * Batch Delete existing Wallet model.
-      * If deletion is successful, the browser will be redirected to the 'index' page.
-      * @return mixed
-      */
+
+    /**
+     * Batch Delete existing Wallet model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @return mixed
+     */
     public function actionBatchDelete()
     {
         if (($ids = Yii::$app->request->post('ids', null)) != null) {

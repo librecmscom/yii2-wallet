@@ -1,13 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+use yii\grid\GridView;
 use yii\widgets\DetailView;
 use xutl\inspinia\Box;
 use xutl\inspinia\Toolbar;
 use xutl\inspinia\Alert;
+use yuncms\wallet\models\WalletLog;
 
 /* @var $this yii\web\View */
 /* @var $model yuncms\wallet\models\Wallet */
+/** @var $dataProvider yuncms\wallet\models\WalletLog */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('wallet', 'Manage Wallet'), 'url' => ['index']];
@@ -59,13 +62,39 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'user_id',
+                    'user.email',
                     'user.username',
                     'currency',
                     'money',
-                    'created_at:datetime',
+                    //'created_at:datetime',
                     'updated_at:datetime',
                 ],
             ]) ?>
+
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'layout' => "{items}\n{summary}\n{pager}",
+                'columns' => [
+                    'id',
+                    'currency',
+                    [
+                        'header' => Yii::t('wallet', 'Income & Expense'),
+                        'value' => function ($model) {
+                            if ($model->type == WalletLog::TYPE_DEC) {
+                                return Html::tag('span', Yii::t('wallet', 'Expenditure'), ['class' => 'label label-warning']);
+                            } else if ($model->type == WalletLog::TYPE_INC) {
+                                return Html::tag('span', Yii::t('wallet', 'Income'), ['class' => 'label label-success']);
+                            }
+                        },
+                        'format' => 'raw',
+                    ],
+                    'money',
+                    'action',
+                    'msg',
+                    'created_at:datetime'
+                ],
+            ]);
+            ?>
             <?php Box::end(); ?>
         </div>
     </div>
