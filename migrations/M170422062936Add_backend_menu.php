@@ -36,6 +36,7 @@ class M170422062936Add_backend_menu extends Migration
             ['创建钱包', $id, '/wallet/wallet/create', 0, NULL],
             ['更新钱包', $id, '/wallet/wallet/update', 0, NULL],
             ['查看钱包', $id, '/wallet/wallet/view', 0, NULL],
+            ['充值', $id, '/wallet/wallet/recharge', 0, NULL],
         ]);
 
         $this->insert('{{%admin_menu}}', [

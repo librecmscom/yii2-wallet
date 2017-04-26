@@ -48,6 +48,11 @@ class WalletController extends Controller
         ]);
     }
 
+    public function recharge()
+    {
+
+    }
+
     /**
      * Displays a single Wallet model.
      * @param integer $id
