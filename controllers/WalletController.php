@@ -16,7 +16,7 @@ use yuncms\wallet\models\Wallet;
  * Class WalletController
  * @package yuncms\video\controllers
  */
-class WalletController extends \yii\web\Controller
+class WalletController extends Controller
 {
     /** @inheritdoc */
     public function behaviors()
