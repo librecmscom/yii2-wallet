@@ -27,7 +27,7 @@ class Module extends \yii\base\Module
     /**
      * @var int 最小提现
      */
-    public $withdrawalsMin = 100;
+    public $withdrawalsMin = 1000;
 
     /**
      * @var array Mailer configuration
