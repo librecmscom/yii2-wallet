@@ -19,7 +19,7 @@
   ],
   "require": {
     "yiisoft/yii2": "~2.0",
-    "yuncms/yii2-user": "~1.0 | dev-master"
+    "yuncms/yii2-user": "~1.0"
   },
   "autoload": {
     "psr-4": {
