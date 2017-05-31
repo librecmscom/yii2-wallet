@@ -9,6 +9,7 @@ namespace yuncms\wallet\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yuncms\user\models\User;
 
 /**
  * 提现模型
@@ -19,6 +20,8 @@ use yii\db\ActiveRecord;
  * @property string $currency
  * @property double $money
  * @property int $confirmed_at
+ *
+ * @property User $user
  * @package yuncms\user\models
  */
 class Withdrawals extends ActiveRecord
@@ -137,7 +140,7 @@ class Withdrawals extends ActiveRecord
 
     public function setRejected()
     {
-        if((bool)$this->updateAttributes(['confirmed_at' => time(), 'status' => static::STATUS_REJECTED])){
+        if ((bool)$this->updateAttributes(['confirmed_at' => time(), 'status' => static::STATUS_REJECTED])) {
             //退款
             if (!$this->getModule()->wallet($this->user_id, $this->currency, $this->money, Yii::t('wallet', 'Withdrawals Rejected'))) {
                 return true;
@@ -176,20 +179,20 @@ class Withdrawals extends ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
-//            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'), 'notice', [
-//                'user' => $this->user,
-//                'message' => '',
-//            ]);
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notify'), 'notice', [
+                'user' => $this->user,
+                'message' => Yii::t('wallet', 'Withdrawal request is received, waiting for approval.'),
+            ]);
         } else if ($this->status == self::STATUS_REJECTED) {//拒绝了提现请求
-//            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'), 'notice', [
-//                'user' => $this->user,
-//                'message' => '',
-//            ]);
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notify'), 'notice', [
+                'user' => $this->user,
+                'message' => Yii::t('wallet', 'Withdrawal request is rejected by Admin, please contact support for any question.'),
+            ]);
         } else if ($this->status == self::STATUS_REJECTED) {//通过并打款
-//            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notice'), 'notice', [
-//                'user' => $this->user,
-//                'message' => '',
-//            ]);
+            $this->getModule()->sendMessage($this->user->email, Yii::t('wallet', 'Withdrawals Notify'), 'notice', [
+                'user' => $this->user,
+                'message' => Yii::t('wallet', 'Withdrawal request is approved, money being transferred.'),
+            ]);
         }
     }
 
