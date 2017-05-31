@@ -46,7 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'bankcard_id')->dropDownList(
                     ArrayHelper::map(Bankcard::find()->select(['id', "CONCAT(bank,' - ',username,' - ',number) as name"])->where(['user_id' => Yii::$app->user->id])->asArray()->all(), 'id', 'name')
-                ); ?>
+                )->hint(Html::a(Yii::t('wallet','Add a bank card'),['/wallet/bankcard/create'])); ?>
+
+
                 <?= $form->field($model, 'money'); ?>
 
                 <div class="form-group">

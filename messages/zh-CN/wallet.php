@@ -32,6 +32,7 @@ return [
     'Withdrawal request is rejected by Admin, please contact support for any question.' => '管理员拒绝了您的提现请求，如有疑问请联系客服！',
     'Withdrawal request is approved, money being transferred.' => '管理员已经审核通过您的提现请求，正在打款！',
     'User ID' => '用户ID',
+    'Add a bank card' => '添加银行卡',
     'Msg' => '操作消息',
     'Action' => '操作',
     'Withdrawals Notice' => '提现通知',
