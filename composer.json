@@ -22,6 +22,9 @@
     "yuncms/yii2-user": "~1.0"
   },
   "autoload": {
+    "files": [
+      "helpers.php"
+    ],
     "psr-4": {
       "yuncms\\wallet\\": ""
     }
