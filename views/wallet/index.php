@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
+
 /*
  * @var $this  yii\web\View
  * @var $form  yii\widgets\ActiveForm
@@ -34,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         'dataProvider' => $dataProvider,
                         'layout' => "{items}\n{pager}",
                         'columns' => [
-                            'currency',
+                            [
+                                'header' => Yii::t('wallet', 'Currency'),
+                                'value' => function ($model) {
+                                    return Html::a($model->currency, ['/wallet/withdrawals/index', 'currency' => $model->currency]);
+                                },
+                                'format' => 'raw',
+                            ],
                             'money',
                             [
                                 'class' => 'yii\grid\ActionColumn',
