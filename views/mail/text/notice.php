@@ -1,12 +1,12 @@
 <?php
-
+use yii\helpers\Html;
 /**
  * @var \yuncms\user\models\User $user
- * @var \yuncms\user\models\Token $token
  */
+/** @var string $message */
 ?>
-<?= Yii::t('user', 'Hello') ?>,
+<?= Yii::t('wallet', 'Dear') ?> <?=Html::encode($user->username)?>：
 
-<?= $this->message; ?>
+<?= $message; ?>
 
 
