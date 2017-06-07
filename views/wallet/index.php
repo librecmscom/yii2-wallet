@@ -48,7 +48,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'buttons' => [
                                     'recharge' =>
                                         function ($url, $model, $key) {
-                                            return '<a href="#" onclick="jQuery(\'#payment-currency\').val(\'' . $model->currency . '\');" data-toggle="modal"
+                                            return Html::a(Yii::t('wallet', 'Recharge'), ['/wallet/wallet/recharge', 'id' => $model->id]) .
+
+                                                '<a href="#" onclick="jQuery(\'#payment-currency\').val(\'' . $model->currency . '\');" data-toggle="modal"
                                                  data-target="#recharge_modal">' . Yii::t('wallet', 'Recharge') . '</a>   ' .
                                                 Html::a(Yii::t('wallet', 'Withdrawals'), Url::to(['/wallet/withdrawals/create', 'currency' => $model->currency]));
                                         }]],
@@ -65,10 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
 if (Yii::$app->hasModule('payment')):
     $payment = new \yuncms\payment\models\Payment();
     $form = ActiveForm::begin([
-        'action' => Url::toRoute(['/payment/default/index']),
+        'action' => Url::toRoute(['/wallet/wallet/recharge']),
     ]); ?>
     <?= Html::activeInput('hidden', $payment, 'currency', ['value' => '']) ?>
-    <?= Html::activeInput('hidden', $payment, 'pay_type', ['value' => \yuncms\payment\models\Payment::TYPE_RECHARGE]) ?>
+    <?= Html::activeInput('hidden', $payment, 'pay_type', ['value' => \yuncms\payment\models\Payment::TYPE_MWEB]) ?>
     <?php Modal::begin([
     'options' => ['id' => 'recharge_modal'],
     'header' => Yii::t('wallet', 'Recharge'),
