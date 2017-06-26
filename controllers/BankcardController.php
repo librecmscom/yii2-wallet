@@ -130,7 +130,7 @@ class BankcardController extends Controller
         if (($model = BankCard::findOne(['id' => $id, 'user_id' => Yii::$app->user->id])) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('wallet','The requested page does not exist.'));
         }
     }
 }

@@ -63,11 +63,9 @@ class Recharge extends ActiveRecord implements OrderInterface
     {
         return [
             [['name', 'trade_type'], 'integer'],
-            [['gateway', 'currency', 'trade_type'], 'required'],
+            [['gateway', 'money', 'currency', 'trade_type'], 'required'],
             [['money'], 'number'],
-
             [['currency'], 'string', 'max' => 20],
-
             ['trade_state', 'default', 'value' => self::STATE_NOT_PAY],
             ['trade_state', 'in', 'range' => [
                 self::STATE_NOT_PAY,

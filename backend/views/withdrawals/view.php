@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options' => [
                                 'class' => 'btn btn-danger btn-sm',
                                 'data' => [
-                                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                    'confirm' => Yii::t('wallet', 'Are you sure you want to delete this item?'),
                                     'method' => 'post',
                                 ],
                             ]
@@ -85,12 +85,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $raw = Html::a(Yii::t('wallet', 'Done'), ['confirm', 'id' => $model->id], [
                                     'class' => 'btn btn-xs btn-success',
                                     'data-method' => 'post',
-                                    'data-confirm' => Yii::t('user', 'Are you sure you want to done?'),
+                                    'data-confirm' => Yii::t('wallet', 'Are you sure you want to done?'),
                                 ]);
                                 $raw .= '   ' . Html::a(Yii::t('wallet', 'Rejected'), ['rejected', 'id' => $model->id], [
                                         'class' => 'btn btn-xs btn-danger',
                                         'data-method' => 'post',
-                                        'data-confirm' => Yii::t('user', 'Are you sure you want to rejected?'),
+                                        'data-confirm' => Yii::t('wallet', 'Are you sure you want to rejected?'),
                                     ]);
                                 return $raw;
                             }

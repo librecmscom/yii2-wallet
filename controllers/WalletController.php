@@ -68,9 +68,9 @@ class WalletController extends Controller
             $payment = new Payment([
                 'currency' => $model->currency,
                 'money' => $model->money,
-                'name' => Yii::t('wallet', 'Recharge'),
+                'name' => Yii::t('wallet', 'Wallet Recharge'),
                 'gateway' => $model->gateway,
-                'pay_type' => Payment::TYPE_MWEB,
+                'trade_type' => Payment::TYPE_NATIVE,
                 'model_id' => $model->id,
                 'model' => get_class($model),
                 'return_url' => Url::to(['/wallet/wallet/index'], true),
@@ -97,7 +97,7 @@ class WalletController extends Controller
         if (($model = Wallet::findOne(['id' => $id, 'user_id' => Yii::$app->user->id])) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('wallet', 'The requested page does not exist.'));
         }
     }
 }

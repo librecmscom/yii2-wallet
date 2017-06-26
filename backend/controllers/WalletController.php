@@ -83,7 +83,7 @@ class WalletController extends Controller
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create success.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('wallet', 'Create success.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -106,7 +106,7 @@ class WalletController extends Controller
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Update success.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('wallet', 'Update success.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -124,7 +124,7 @@ class WalletController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete success.'));
+        Yii::$app->getSession()->setFlash('success', Yii::t('wallet', 'Delete success.'));
         return $this->redirect(['index']);
     }
 
@@ -140,9 +140,9 @@ class WalletController extends Controller
                 $model = $this->findModel($id);
                 $model->delete();
             }
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete success.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('wallet', 'Delete success.'));
         } else {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete failed.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('wallet', 'Delete failed.'));
         }
         return $this->redirect(['index']);
     }
@@ -159,7 +159,7 @@ class WalletController extends Controller
         if (($model = Wallet::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException (Yii::t('app', 'The requested page does not exist.'));
+            throw new NotFoundHttpException (Yii::t('wallet', 'The requested page does not exist.'));
         }
     }
 }
