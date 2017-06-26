@@ -73,13 +73,16 @@ $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'header' => Yii::t('wallet', 'Operation'),
-                        'template' => '{view} {update} {delete}',
-                        //'buttons' => [
-                        //    'update' => function ($url, $model, $key) {
-                        //        return $model->status === 'editable' ? Html::a('Update', $url) : '';
-                        //    },
-                        //],
-                    ],
+                        'template' => '{recharge} {view} {update} {delete}',
+                        'buttons' => ['recharge' => function ($url, $model, $key) {
+                            return Html::a('<span class="fa fa-plus"></span>',
+                                Url::toRoute(['recharge', 'id' => $model->id]), [
+                                    'title' => Yii::t('wallet', 'Wallet Recharge'),
+                                    'aria-label' => Yii::t('wallet', 'Wallet Recharge'),
+                                    'data-pjax' => '0',
+                                ]);
+                        }]
+                    ]
                 ],
             ]); ?>
             <?php Box::end(); ?>

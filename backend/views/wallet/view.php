@@ -40,6 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options' => ['class' => 'btn btn-primary btn-sm']
                         ],
                         [
+                            'label' => Yii::t('wallet', 'Wallet Recharge'),
+                            'url' => ['recharge', 'id' => $model->id],
+                            'options' => ['class' => 'btn btn-primary btn-sm']
+                        ],
+                        [
                             'label' => Yii::t('wallet', 'Delete Wallet'),
                             'url' => ['delete', 'id' => $model->id],
                             'options' => [

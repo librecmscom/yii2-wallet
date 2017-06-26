@@ -10,6 +10,7 @@ use yii\bootstrap\ActiveForm;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yuncms\wallet\models\Wallet;
+use yuncms\wallet\models\RechargeForm;
 use yuncms\wallet\backend\models\WalletSearch;
 
 /**
@@ -90,6 +91,25 @@ class WalletController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * 钱包充值
+     * @param int $id
+     * @return array|string|Response
+     */
+    public function actionRecharge($id)
+    {
+        $wallet = $this->findModel($id);
+        $model = new RechargeForm();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('wallet', 'Recharge success.'));
+            return $this->redirect(['view', 'id' => $wallet->id]);
+        }
+        return $this->render('recharge', [
+            'model' => $model,
+            'wallet' => $wallet,
+        ]);
     }
 
     /**

@@ -11,7 +11,7 @@ use xutl\inspinia\Alert;
 $this->title = Yii::t('wallet', 'Update Wallet') . ': ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('wallet', 'Manage Wallet'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('wallet', 'Update');
 ?>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
