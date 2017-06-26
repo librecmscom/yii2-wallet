@@ -26,7 +26,6 @@ $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
             <?= Alert::widget() ?>
             <?php Pjax::begin(); ?>                
             <?php Box::begin([
-                //'noPadding' => true,
                 'header' => Html::encode($this->title),
             ]); ?>
             <div class="row">
