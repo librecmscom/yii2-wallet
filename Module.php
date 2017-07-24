@@ -13,17 +13,6 @@ use yuncms\wallet\models\WalletLog;
  */
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'yuncms\wallet\controllers';
-
-    /**
-     * @var string the default route of this module. Defaults to `default`.
-     * The route may consist of child module ID, controller ID, and/or action ID.
-     * For example, `help`, `post/create`, `admin/post/create`.
-     * If action ID is not given, it will take the default value as specified in
-     * [[Controller::defaultAction]].
-     */
-    public $defaultRoute = 'wallet';
-
     /**
      * @var int 最小提现
      */
@@ -32,7 +21,7 @@ class Module extends \yii\base\Module
     /**
      * @var array Mailer configuration
      */
-    public $mailViewPath = '@yuncms/wallet/views/mail';
+    public $mailViewPath = '@yuncms/wallet/mail';
 
     /**
      * @var string|array Default: `Yii::$app->params['adminEmail']` OR `no-reply@example.com`

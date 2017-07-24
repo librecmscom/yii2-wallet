@@ -5,7 +5,7 @@
  * @license http://www.tintsoft.com/license/
  */
 
-namespace yuncms\wallet\controllers;
+namespace yuncms\wallet\frontend\controllers;
 
 use Yii;
 use yii\helpers\Url;

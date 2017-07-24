@@ -1,10 +1,11 @@
 <?php
 
-namespace yuncms\wallet\models;
+namespace yuncms\wallet\frontend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yuncms\wallet\models\Bankcard;
 
 /**
  * BankCardSearch represents the model behind the search form about `yuncms\user\models\BankCard`.

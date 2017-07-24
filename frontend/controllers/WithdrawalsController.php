@@ -1,6 +1,6 @@
 <?php
 
-namespace yuncms\wallet\controllers;
+namespace yuncms\wallet\frontend\controllers;
 
 use Yii;
 use yii\web\Response;
@@ -10,7 +10,7 @@ use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yuncms\wallet\models\Wallet;
 use yuncms\wallet\models\Withdrawals;
-use yuncms\wallet\models\WithdrawalsSearch;
+use yuncms\wallet\frontend\models\WithdrawalsSearch;
 
 /**
  * WithdrawalsController implements the CRUD actions for Withdrawals model.

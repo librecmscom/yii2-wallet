@@ -14,4 +14,5 @@ class Module extends \yuncms\wallet\Module
 {
     public $controllerNamespace = 'yuncms\wallet\backend\controllers';
 
+    public $defaultRoute = 'wallet';
 }

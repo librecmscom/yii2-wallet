@@ -1,6 +1,6 @@
 <?php
 
-namespace yuncms\wallet\controllers;
+namespace yuncms\wallet\frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -8,7 +8,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yuncms\wallet\models\Bankcard;
-use yuncms\wallet\models\BankcardSearch;
+use yuncms\wallet\frontend\models\BankcardSearch;
 
 /**
  * BankcardController implements the CRUD actions for BankCard model.
