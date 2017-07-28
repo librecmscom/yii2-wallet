@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'user_id',
-                    'user.username',
+                    'user.name',
                     'bankcard.bank',
                     'bankcard.city',
                     'bankcard.name',

@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'user_id',
                     'user.email',
-                    'user.username',
+                    'user.name',
                     'currency',
                     'money',
                     //'created_at:datetime',
