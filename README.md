@@ -1,5 +1,8 @@
 # yii2-wallet
+
 钱包模块
+
+[![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 
 ###配置参数
 
