@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "yiisoft/yii2": "~2.0",
+    "yiisoft/yii2": "~2.0.6",
     "yuncms/yii2-user": "~2.0"
   },
   "autoload": {
