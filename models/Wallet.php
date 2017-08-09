@@ -14,9 +14,11 @@ use yii\db\ActiveRecord;
  * 钱包模型
  *
  * @property integer $id
- * @property integer $user_id
+ * @property integer $user_id 用户ID
  * @property string $currency 币种
  * @property double $money 10,2
+ * @property string $action 操作
+ * @property string $msg 备注
  * @property integer $created_at
  * @property integer $updated_at
  */

@@ -89,6 +89,16 @@ class WalletLog extends ActiveRecord
     }
 
     /**
+     * 判断指定的日志是否存在
+     * @param string|array $where
+     * @return bool
+     */
+    public static function hasLog($where)
+    {
+        return static::find()->where($where)->exists();
+    }
+
+    /**
      * 快速创建实例
      * @param array $attribute
      * @return mixed
