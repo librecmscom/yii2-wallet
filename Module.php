@@ -78,7 +78,6 @@ class Module extends \yii\base\Module
         return $message->send();
     }
 
-
     /**
      * 变更指定用户钱包 + 钱或 - 钱
      * @param int $user_id

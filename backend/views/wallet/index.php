@@ -65,7 +65,7 @@ $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
                     //['class' => 'yii\grid\SerialColumn'],
                     'id',
                     'user_id',
-                    'user.name',
+                    'user.username',
                     'currency',
                     'money',
                     'created_at:datetime',

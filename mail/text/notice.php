@@ -5,7 +5,7 @@ use yii\helpers\Html;
  */
 /** @var string $message */
 ?>
-<?= Yii::t('wallet', 'Dear') ?> <?=Html::encode($user->name)?>：
+<?= Yii::t('wallet', 'Dear') ?> <?=Html::encode($user->username)?>：
 
 <?= $message; ?>
 

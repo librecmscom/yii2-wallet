@@ -61,7 +61,7 @@ $this->registerJs("jQuery(\"#batch_deletion\").on(\"click\", function () {
                     ],
                     //['class' => 'yii\grid\SerialColumn'],
                     'id',
-                    'user.name',
+                    'user.username',
                     [
                         'header' => Yii::t('wallet', 'BankName'),
                         'value' => function ($model) {
