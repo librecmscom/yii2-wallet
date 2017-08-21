@@ -9,6 +9,7 @@ namespace yuncms\wallet\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yuncms\user\models\User;
 
 /**
  * 银行卡模型
@@ -85,6 +86,6 @@ class Bankcard extends ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }
