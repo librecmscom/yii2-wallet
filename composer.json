@@ -31,5 +31,10 @@
   },
   "suggest": {
     "yuncms/yii2-payment": "Allows you to use Payment"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0-dev"
+    }
   }
 }
