@@ -37,9 +37,9 @@
       "name": "wallet",
       "i18n": {
         "class": "yii\\i18n\\PhpMessageSource",
-        "basePath": "yuncms/wallet/message"
+        "basePath": "@yuncms/wallet/message"
       },
-      "migrationNamespace": "@yuncms/wallet/migrations",
+      "migrationNamespace": "yuncms/wallet/migrations",
       "backend": {
         "class": "yuncms\\wallet\\backend\\Module"
       },
