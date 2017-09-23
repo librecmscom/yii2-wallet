@@ -33,6 +33,20 @@
     "yuncms/yii2-payment": "Allows you to use Payment"
   },
   "extra": {
+    "yuncms": {
+      "name": "wallet",
+      "i18n": {
+        "class": "yii\\i18n\\PhpMessageSource",
+        "basePath": "@yuncms/wallet/message"
+      },
+      "migrationNamespace": "@yuncms/wallet/migrations",
+      "backend": {
+        "class": "yuncms\\wallet\\backend\\Module"
+      },
+      "frontend": {
+        "class": "yuncms\\wallet\\frontend\\Module"
+      }
+    },
     "branch-alias": {
       "dev-master": "2.0-dev"
     }
